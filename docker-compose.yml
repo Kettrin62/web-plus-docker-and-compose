@@ -11,7 +11,7 @@ services:
     depends_on:
       - postgres
     links:
-      - "db:postgres"
+      - "postgres"
     healthcheck:
       test: "wget -nv -t1 --spider 'http://localhost:4000/'"
       interval: 1m30s
