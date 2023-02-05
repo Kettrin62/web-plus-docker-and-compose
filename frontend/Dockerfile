@@ -7,6 +7,6 @@ RUN npm run build
 
 FROM nginx:1.23.1-alpine AS production
 COPY --from=builder /app/build /usr/share/nginx/html
-COPY --from=builder /app/nginx/conf.d /etc/nginx/conf.d
+COPY --from=builder /app/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 EXPOSE 81
 CMD ["nginx", "-g", "daemon off;"]
