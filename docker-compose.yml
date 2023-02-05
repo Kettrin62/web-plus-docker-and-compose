@@ -42,7 +42,7 @@ services:
       - ./certbot/www:/var/www/certbot/:ro
 
   certbot:
-    image: certbot/certbot
+    image: certbot/cerbot:latest
     container_name: certbot
     volumes:
       - ./certbot/conf:/etc/letsencrypt/:rw
