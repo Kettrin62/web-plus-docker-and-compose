@@ -1,41 +1,36 @@
 version: "3.9"
+
+volumes:
+  postgres_data:
+
 services:
+  postgres:
+    container_name: "kupipodariday-database"
+    image: postgres:latest
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./backend/.env
 
   backend:
     container_name: "kupipodariday-backend"
     image: "nestjs-app"
     build: ./backend
-    restart: "unless-stopped"
-    ports:
-      - "4000:3000"
+    restart: unless-stopped
     depends_on:
       - postgres
-    links:
-      - "postgres"
-    healthcheck:
-      test: "wget -nv -t1 --spider 'http://localhost:4000/'"
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
-  postgres:
-    container_name: "kupipodariday-database"
-    image: "postgres:13"
-    restart: unless-stopped
-    env_file: ./backend/.env
-    volumes: 
-      - pg-data:/var/lib/postgresql/data/
+    env_file:
+      - ./backend/.env
+    ports:
+      - "4000:3000"
 
   frontend:
     container_name: "kupipodariday-frontend"
     image: "react-app"
     build: ./frontend
-    restart: "unless-stopped"
+    restart: unless-stopped
     ports:
       - "8081:80"
     depends_on:
       - backend
-
-volumes:
-  pg-data:
