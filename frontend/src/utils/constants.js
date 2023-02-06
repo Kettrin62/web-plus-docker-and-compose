@@ -1,4 +1,4 @@
-export const URL = "http://kett.kupipodariday.nomoredomainsclub.ru:4000";
+export const URL = "https://kett.kupipodariday.nomoredomainsclub.ru/api";
 
 export const MINIMUM_PASSWORD_LENGTH = 3;
 export const MINIMUM_USERNAME_LENGTH = 3;
